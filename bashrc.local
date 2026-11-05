@@ -1,0 +1,16 @@
+# eza
+alias ls='eza --color=auto --icons --group-directories-first'
+alias ll='eza -l --color=auto --icons --group-directories-first'
+alias la='eza -la --color=auto --icons --group-directories-first'
+alias lt='eza --tree --level=2 --icons'
+
+# prompt: exit code + user@host + dir
+__set_prompt() {
+    local code=$?
+    local ec=''
+    if [[ $code -ne 0 ]]; then
+        ec='\[\e[31m\]('"$code"')\[\e[0m\] '
+    fi
+    PS1="${ec}"'\[\e[34m\]\u\[\e[0m\]@\[\e[32m\]\h\[\e[0m\] \[\e[36m\]\W\[\e[0m\] \$ '
+}
+PROMPT_COMMAND=__set_prompt
